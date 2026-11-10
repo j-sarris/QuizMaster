@@ -9,6 +9,7 @@ questions = [
         "question": "Ποια είναι η πρωτεύουσα της Ελλάδας;",
         "options": ["Αθήνα", "Πάτρα", "Λάρισα"],
         "answer": "Αθήνα"
+        
     },
     {
         "question": "Πόσο κάνει 5 * 5;",
@@ -26,39 +27,67 @@ print("==============================")
 print("       QUIZ MASTER v0.2")
 print("==============================")
 
-player_name = input("Πώς σε λένε; ")
+while True:
+    while True:
+        player_name = input("Πώς σε λένε; ").strip()
+        if not player_name:
+            print ("Το όνομα δεν μπορεί να είναι κενό. Δοκιμάστε ξανά.")
+        else:
+            break
 
-score = 0
+    score = 0
 
-print("\nΚαλώς ήρθες,", player_name)
-print("Απάντησε στις παρακάτω ερωτήσεις!\n")
+    print("\nΚαλώς ήρθες,", player_name)
+    print("Απάντησε στις παρακάτω ερωτήσεις!\n")
 
-for index, question in enumerate(questions, start=1):
+    for index, question in enumerate(questions, start=1):
 
-    print("\nΕρώτηση", index)
-    print("------------------------------")
+        print("\nΕρώτηση", index)
+        print("------------------------------")
 
-    print(question["question"])
+        print(question["question"])
 
-    for option in question["options"]:
-        print("-", option)
+        for option in question["options"]:
+            print("-", option)
 
-    answer = input("\nΗ απάντησή σου: ")
+        answer = input("\nΗ απάντησή σου: ")
 
-    if answer.strip().lower() == question["answer"].lower():
-        print("ΣΩΣΤΑ! +1 βαθμός")
-        score += 1
+        if answer.strip().lower() == question["answer"].lower():
+            print("ΣΩΣΤΑ! +1 βαθμός")
+            score += 1
+        
+        else:
+            print("ΛΑΘΟΣ!")
+            print("Η σωστή απάντηση είναι:", question["answer"])
+
+        print("Τρέχον σκορ:", score)
+
+    print("\n==============================")
+    print("       ΤΕΛΙΚΑ ΑΠΟΤΕΛΕΣΜΑΤΑ")
+    print("==============================")
+
+    print("Παίκτης:", player_name)
+    print("Τελική βαθμολογία:", score, "/", len(questions))
+
+    if score == 3:  
+        print("Εξαιρετικά! Τα απάντησες όλα σωστά!")
+    elif score == 2:
+        print("Πολύ καλά!")
+    elif score == 1:
+        print("Καλή προσπάθεια!")
     else:
-        print("ΛΑΘΟΣ!")
-        print("Η σωστή απάντηση είναι:", question["answer"])
+        print("Χρειάζεται λίγη ακόμη εξάσκηση!")
 
-    print("Τρέχον σκορ:", score)
+    print("\nΕυχαριστούμε που έπαιξες!")
 
-print("\n==============================")
-print("       ΤΕΛΙΚΑ ΑΠΟΤΕΛΕΣΜΑΤΑ")
-print("==============================")
+    while True:
+        tryagain = input("\nΠαίξετε ξανά; (Y/N): ").lower()
+        if tryagain in ("y", "n"):
+            break
+        print ("Λάθος επιλογή!")
 
-print("Παίκτης:", player_name)
-print("Τελική βαθμολογία:", score, "/", len(questions))
+    if tryagain == "n":
+        break
 
-print("\nΕυχαριστούμε που έπαιξες!")
+
+
